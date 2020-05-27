@@ -14,7 +14,7 @@ def plotScatter(data, x, y, title, **kwargs):
     plt.title(title)
     plt.show()
 
-def plotSilhouette(silhouetteValues, silhouetteAvg, kMeans, k, dataCount):
+def plotSilhouette(silhouetteValues, silhouetteAvg, kMeans, k, dataCount, xLabel, yLabel):
     _, ax = plt.subplots()
     y_lower = 10
     ax.set_xlim([-1, 1])
@@ -29,11 +29,12 @@ def plotSilhouette(silhouetteValues, silhouetteAvg, kMeans, k, dataCount):
         ax.text(-0.05, y_lower + 0.5 * size_cluster_i, str(i))
         y_lower = y_upper + 10
 
-    ax.set_title("The silhouette plot for the various clusters.")
-    ax.set_xlabel("The silhouette coefficient values")
-    ax.set_ylabel("Cluster label")
+    ax.set_title('Silhouette plot for {}/{} with {} clusters'.format(xLabel, yLabel, k))
+    ax.set_xlabel('Silhouette coefficient values')
+    ax.set_ylabel('Cluster number')
     ax.axvline(x=silhouetteAvg, color="red", linestyle="--")
 
     ax.set_yticks([])
     ax.set_xticks([-1, -0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8, 1])
     plt.show()
+    print('Average Silhouette value for {}/{} is {}'.format(xLabel, yLabel, silhouetteAvg))

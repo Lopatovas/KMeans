@@ -12,12 +12,12 @@ def clusterData(data, x, y, k):
     kMeans = KMeans(n_clusters=k).fit_predict(data[[x, y]])
     print(x,y,Counter(kMeans))
     graphics.plotScatter(data, x, y, '{}/{} data after clustering with {} clusters'.format(x, y, k), kMeans=kMeans)
-    silhouetteValidate(data, kMeans, k)
+    silhouetteValidate(data, kMeans, k, x, y)
 
-def silhouetteValidate(data, kMeans, k):
+def silhouetteValidate(data, kMeans, k, x, y):
     silhouetteAvg = silhouette_score(data, kMeans)
     silhouetteValues = silhouette_samples(data, kMeans)
-    graphics.plotSilhouette(silhouetteValues, silhouetteAvg, kMeans, k, len(data))
+    graphics.plotSilhouette(silhouetteValues, silhouetteAvg, kMeans, k, len(data), x, y)
     
 
 def clusterDataPairs(data, kMin, kMax):
